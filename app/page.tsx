@@ -1,9 +1,14 @@
-// import LinkPreview from "@/app/components/LinkPreview";
+import LinkDisplay from "@/app/components/LinkDisplay";
+import getLinkById from "@/app/lib/getLinkById";
 
 
 export default function Home() {
   return (
-    <h1 className='text-orange-500'>CS391 MP5: URL SHORTENER</h1>
-        // <LinkPreview></LinkPreview>
+      <div>
+          <h1 className='text-Roboto'>CS391 MP5: URL SHORTENER</h1>
+          <div className="w-full bg-yellow-100">
+                <LinkDisplay/>
+          </div>
+      </div>
   );
 }

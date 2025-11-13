@@ -7,6 +7,19 @@ export default async function createNewLink(url: string, alias: string): Promise
     console.log("Creating new link...");
     const postCollection = await getCollection(LINKS_COLLECTION);
 
+    if (encodeURIComponent(url) != url) {
+        throw new Error("Invalid URL. Check for errors or enter another URL.");
+    }
+
+    if (encodeURIComponent(alias) != alias){
+        throw new Error("Invalid alias, please enter a different one");
+    }
+
+    const alias_exists = postCollection.findOne({alias: alias});
+
+    if (!alias_exists) {
+        throw new Error("Alias already exists. Pick a different one.");
+    }
 
     const shortendURL = "https://cs391-mp-5-sf.vercel.app/" + alias;
 

@@ -4,8 +4,8 @@ import { useState } from "react";
 import NewLinkForm from "@/app/components/NewLinkForm";
 import LinkPreview from "@/app/components/LinkPreview";
 
-export default function LinkDisplay({inputLinks,}: {inputLinks: LinkProps}){
-    const [link, setLink] = useState(inputLinks);
+export default function LinkDisplay(){
+    const [link, setLink] = useState<LinkProps>();
 
     return (
         <div className="flex flex-col items-center">
