@@ -8,17 +8,27 @@ export default async function createNewLink(url: string, alias: string): Promise
 
     const postCollection = await getCollection(LINKS_COLLECTION);
 
-    if (encodeURIComponent(url) != url) {
+    try {
+        (encodeURIComponent(url))
+    }
+    catch (error) {
+        console.log(error);
         throw Error("Invalid URL. Check for errors or enter another URL.");
+    }
+    console.log("URL", url);
+    const url_exists = await postCollection.findOne({longurl: url});
+
+    if (url_exists != null ) {
+        throw Error("URL already exists. Pick a different one.");
     }
 
     if (encodeURIComponent(alias) != alias){
         throw Error("Invalid alias, please enter a different one");
     }
 
-    const alias_exists = postCollection.findOne({alias: alias});
+    const alias_exists = await postCollection.findOne({alias: alias});
 
-    if (alias_exists === null ) {
+    if (alias_exists != null ) {
         throw Error("Alias already exists. Pick a different one.");
     }
 
