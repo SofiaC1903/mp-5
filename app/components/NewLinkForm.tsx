@@ -4,7 +4,7 @@ import { useState } from "react";
 import createNewLink from "@/app/lib/createNewLink";
 import {LinkProps} from "@/LinkProps";
 
-export default function NewLinkForm({displayAction}:{displayAction: (link:LinkProps)=>void; }) {
+export default function NewLinkForm({displayAction,}:{displayAction: (link:LinkProps)=>void; }) {
     const [longurl, setLongurl] = useState("");
     const [alias, setAlias] = useState("");
 
@@ -22,7 +22,7 @@ export default function NewLinkForm({displayAction}:{displayAction: (link:LinkPr
             <TextField
                 variant="outlined"
                 sx={{width:"70%"}}
-                label={"Enter a lonf URL here"}
+                label={"Enter a long URL here"}
                 value={longurl}
                 onChange={(e)=>setLongurl(e.target.value)}
             />
