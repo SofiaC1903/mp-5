@@ -4,8 +4,8 @@ import NewLinkForm from "@/app/components/NewLinkForm";
 import LinkPreview from "@/app/components/LinkPreview";
 import {LinkProps} from "@/LinkProps";
 
-export default function LinkDisplay({inputLinks}: {inputLinks: LinkProps[];}){
-    const [links, setLink] = useState(inputLinks);
+export default function LinkDisplay(){
+    const [links, setLink] = useState<LinkProps[]>([]);
 
     return (
         <div className="flex flex-col items-center">
