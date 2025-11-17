@@ -5,10 +5,6 @@ import {LinkProps} from "@/LinkProps";
 
 export default async function createNewLink(url: string, alias: string): Promise<LinkProps>{
     console.log("Creating new url...");
-    const MONGO_URI = process.env.MONGO_URI;
-    if (!MONGO_URI) {
-        throw new Error("MONGO_URI environment variable is undefined");
-    }
 
     const postCollection = await getCollection(LINKS_COLLECTION);
 
