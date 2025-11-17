@@ -1,14 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Titan+One&display=swap");
 @import "tailwindcss";
 
+.titan-one-regular{
+    font-family: "Titan One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 @theme{
-    --color-lemonchiffon: #FEF9C2;
-    --color-uranianblue: #BCE7FD;
-    --color-lilac: #C492B1;
-    --color-raspberry: #AF3B6E;
+    --color-dustytaupe: #9C7F6D;
+    --color-alabastergrey: #E1E2E3;
+    --color-stormyteal: #0A6D70;
+    --color-paleslate: #ADB7C1;
 }
 
 body {
-  background: var(--color-raspberry);
-  color: var(--color-uranianblue);
+  background: var(--color-dustytaupe);
   font-family: Roboto, Helvetica, sans-serif;
 }
