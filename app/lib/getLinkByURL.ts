@@ -1,5 +1,5 @@
 "use server";
-import getCollection, {LINKS_COLLECTION} from "@/app/lib/db";
+import getCollection, {LINKS_COLLECTION} from "@/db";
 import { ObjectId } from "mongodb";
 import { LinkProps } from "@/LinkProps";
 
