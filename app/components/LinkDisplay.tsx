@@ -9,10 +9,7 @@ export default function LinkDisplay(){
 
     return (
         <div className="flex flex-col items-center">
-            <NewLinkForm
-                displayAction={(newLink: LinkProps)=>{
-                    setLink([newLink]);
-                }}/>
+            <NewLinkForm/>
             {links.map((l: LinkProps)=>(
                 <LinkPreview key={l.id} link={l}/>
             ))}
