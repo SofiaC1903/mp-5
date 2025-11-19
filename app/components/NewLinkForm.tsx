@@ -1,9 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import createNewLink from "@/app/lib/createNewLink";
-import {LinkProps} from "@/LinkProps";
 import styled from "styled-components";
-import Link from "next/link";
 
 const StyledForm = styled.form`
     display: flex;
