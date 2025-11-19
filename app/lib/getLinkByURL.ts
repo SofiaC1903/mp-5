@@ -1,31 +1,18 @@
 "use server";
 import getCollection, {LINKS_COLLECTION} from "@/db";
-import { ObjectId } from "mongodb";
-import { LinkProps } from "@/LinkProps";
 
-export default async function getLinkByURL(URL: string): Promise<LinkProps | null>{
+export default async function getLinkByURL(alias: string): Promise<string | null>{
+    if (!alias){
+        return null;
+    }
+
     const linkCollection = await getCollection(LINKS_COLLECTION);
 
-    let longURL;
+    const data = await linkCollection.findOne({alias: alias});
 
-    try{
-        longURL = new ObjectId(URL);
-    } catch {
+    if (!data){
         return null;
     }
 
-    const data = await linkCollection.findOne({longurl: longURL});
-
-    if (data === null){
-        return null;
-    }
-
-    const link = {
-        id: data.id,
-        longurl: data.longurl,
-        alias: data.alias,
-        shorturl: data.shorturl,
-    };
-
-    return link;
+    return data.url;
 }
