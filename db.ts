@@ -1,4 +1,5 @@
 import {MongoClient, Db, Collection } from "mongodb";
+import {LinkProps} from "@/LinkProps";
 
 const MONGO_URI = process.env.MONGO_URI as string;
 

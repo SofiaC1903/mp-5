@@ -39,12 +39,20 @@ export default async function createNewLink(url: string, alias: string): Promise
 
     const postCollection = await getCollection(LINKS_COLLECTION);
 
-    const link = {
+    const res = await postCollection.insertOne({
         longurl: url,
         alias: alias,
-    }
-
-    const res = await postCollection.insertOne({link});
+        time: new Intl.DateTimeFormat("en-US", {
+            timeZone: "America/New_York",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+        }).format(new Date()),
+    });
 
     if(!res.acknowledged){
         throw Error("Failed to insert url into DB.");

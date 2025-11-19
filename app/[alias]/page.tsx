@@ -8,6 +8,7 @@ export default async function GetShortLink({params}:{params: Promise<{alias: str
     const link = await getLinkByURL(alias);
 
     if (link){
+        console.log("Redirecting to: " + link);
         redirect(link);
     }
 

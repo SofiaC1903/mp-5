@@ -1,6 +1,7 @@
 "use server";
 import getCollection, {LINKS_COLLECTION} from "@/db";
 
+
 export default async function getLinkByURL(alias: string): Promise<string | null>{
     if (!alias){
         return null;

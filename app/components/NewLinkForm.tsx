@@ -20,7 +20,7 @@ const StyledHelperText = styled.h2`
 `
 
 const TextField = styled.input`
-    border-radius: 20px;
+    border-radius: 5px;
     background-color: #ADB7C1;
     margin: 20px;
     width:70%;
@@ -36,8 +36,10 @@ const StyledLink = styled.p`
 const StyledButton = styled.button`
     margin: 20px;
     background-color: #3BA584;
+    border-radius: 15px;
+    color: var(--color-alabastergrey);
     font-family: "Titan One", sans-serif;
-    height: 10%;
+    height: 15%;
     width: 30%;
 `
 
@@ -74,7 +76,7 @@ export default function NewLinkForm() {
             }
         }catch(err){
             console.error(err);
-            setError("An error occurred while creating link. Please try again later.");
+            setError("An error occurred while creating all. Please try again later.");
         }finally {
             setLoading(false);
         }
@@ -93,7 +95,7 @@ export default function NewLinkForm() {
 
 
     return(
-        <div>
+        <div className="bg-stormyteal w-full p-8">
             <StyledForm
                     onSubmit={async (event) => {
                     event.preventDefault();
@@ -142,7 +144,7 @@ export default function NewLinkForm() {
                 <StyledDiv>
                     <h4>Final URL:</h4>
                     <a
-                        href={shorturl}
+                        href={longurl}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
