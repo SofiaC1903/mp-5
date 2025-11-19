@@ -15,5 +15,5 @@ export default async function getLinkByURL(alias: string): Promise<string | null
         return null;
     }
 
-    return data.url;
+    return data.longurl;
 }
