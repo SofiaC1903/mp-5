@@ -1,51 +1,55 @@
 "use server";
 import getCollection, {LINKS_COLLECTION} from "@/db";
+import getLinkByURL from "@/app/lib/getLinkByURL";
 import {LinkProps} from "@/LinkProps";
 
 
-export default async function createNewLink(url: string, alias: string): Promise<LinkProps>{
+export default async function createNewLink(url: string, alias: string): Promise<string>{
     console.log("Creating new url...");
-
-    const postCollection = await getCollection(LINKS_COLLECTION);
-
-    try {
-        (encodeURIComponent(url))
-    }
-    catch (error) {
-        console.log(error);
-        throw Error("Invalid URL. Check for errors or enter another URL.");
-    }
-    console.log("URL", url);
-    const url_exists = await postCollection.findOne({longurl: url});
-
-    if (url_exists != null ) {
-        throw Error("URL already exists. Pick a different one.");
-    }
-
-    if (encodeURIComponent(alias) != alias){
+    if (!url || !alias){
+        throw Error("Url or alias is missing. Please ensure both have been introduced");
+    }else if(
+        url.startsWith("https://cs-https://cs391-mp-5-sf.vercel.app/") ||
+        url.startsWith("http://localhost:3000/")
+    ){
+        throw Error("Invalid URL: It will result in cycles.")
+    }else if(encodeURIComponent(alias) != alias){
         throw Error("Invalid alias, please enter a different one");
     }
 
-    const alias_exists = await postCollection.findOne({alias: alias});
+    try{
+        const res = await fetch(url);
+        if (res.status < 200 || res.status >= 500){
+            console.log("Url responded in an invalid way: ", res.status);
+            return "Invalid URL: bad status code" + res.status;
+        }
+    } catch {
+        console.log("Failed to fetch URL");
+        return "Invalid URL: Failed to fetch URL. Try again or introduce new URL"
+    }
 
-    if (alias_exists != null ) {
+
+
+
+    const alias_exists = await getLinkByURL(alias);
+
+    if (alias_exists) {
         throw Error("Alias already exists. Pick a different one.");
     }
 
-    const shortendURL = "https://cs391-mp-5-sf.vercel.app/" + alias;
+    const postCollection = await getCollection(LINKS_COLLECTION);
 
     const link = {
         longurl: url,
         alias: alias,
-        shorturl: shortendURL,
     }
 
-    const res = await postCollection.insertOne({...link});
+    const res = await postCollection.insertOne({link});
 
     if(!res.acknowledged){
-        throw Error("Failed to insert url into DB");
+        throw Error("Failed to insert url into DB.");
     }
 
-    return {...link, id: res.insertedId.toHexString()};
+    return ""
 
 }
